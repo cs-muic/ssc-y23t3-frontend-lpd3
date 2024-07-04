@@ -1,46 +1,14 @@
 <template>
-  <div class="app-container">
-    <header class="p-3 text-bg-dark fixed-top">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-              <use xlink:href="#bootstrap" />
-            </svg>
-          </a>
-
-          <ul class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0 gap-3">
-            <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-          </ul>
-
-          <div class="ms-auto text-end">
-            <button class="btn btn-outline-light me-2 borderless-btn">Login</button>
-            <button type="button" class="btn btn-warning">Sign-up</button>
-          </div>
-        </div>
-      </div>
-    </header>
-    <main class="form-signin w-100 m-auto">
-      <form>
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
-        <div class="form-floating">
-          <input type="email" class="form-control" id="floatingInput" placeholder="Email" required>
-          <label for="floatingInput">Email address</label>
-        </div>
-        <div class="form-floating">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
-          <label for="floatingPassword">Password</label>
-        </div>
-        <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-      </form>
-    </main>
-  </div>
+  <Nav />
+  <router-view />
 </template>
+<script>
+import Nav from '@/components/NavigationBar.vue'
+export default {
+  // eslint-disable-next-line vue/no-unused-components
+  components: { Nav }
+}
+</script>
 
 <style>
 .borderless-btn {
@@ -108,9 +76,3 @@ header .nav-link {
   margin-bottom: 15px;
 }
 </style>
-
-<script>
-export default {
-  name: 'App'
-}
-</script>
