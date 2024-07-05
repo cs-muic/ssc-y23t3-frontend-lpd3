@@ -2,32 +2,48 @@
   <div class="app-container">
     <main class="form-signin w-100 m-auto">
       <form @submit.prevent="onSubmit">
-        <h1 class="h3 mb-3 fw-normal">Sign up</h1>
+        <h1 class="h3 mb-3 fw-normal">Sing up</h1>
 
+        <!-- First Name Field -->
+        <div class="form-floating">
+          <input
+              type="text"
+              class="form-control"
+              id="firstNameInput"
+              placeholder="First Name"
+              v-model="data.firstName"
+              required
+          />
+          <label for="firstNameInput"></label>
+        </div>
+
+        <!-- Last Name Field -->
+        <div class="form-floating">
+          <input
+              type="text"
+              class="form-control"
+              id="lastNameInput"
+              placeholder="Last Name"
+              v-model="data.lastName"
+              required
+          />
+          <label for="lastNameInput"></label>
+        </div>
+
+        <!-- Email Field -->
         <div class="form-floating">
           <input
               type="email"
               class="form-control"
               id="emailInput"
               placeholder="Email"
-              v-model="data.Email"
+              v-model="data.email"
               required
           />
           <label for="emailInput"></label>
         </div>
 
-        <div class="form-floating">
-          <input
-              type="text"
-              class="form-control"
-              id="nameInput"
-              placeholder="Name"
-              v-model="data.Name"
-              required
-          />
-          <label for="nameInput"></label>
-        </div>
-
+        <!-- Password Field -->
         <div class="form-floating">
           <input
               type="password"
@@ -40,6 +56,7 @@
           <label for="passwordInput"></label>
         </div>
 
+        <!-- Confirm Password Field -->
         <div class="form-floating">
           <input
               type="password"
@@ -63,14 +80,18 @@ import { reactive } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
+// Reactive data object including firstName and lastName
 const data = reactive({
-  Email: '',
-  Name: '',
+  firstName: '',
+  lastName: '',
+  email: '',
   password: '',
   password_confirmation: ''
 });
+
 const router = useRouter();
 
+// Submit handler for the form
 const onSubmit = async () => {
     await axios.post('http://localhost:8080/api/register', data);
     await router.push('/login');
@@ -85,6 +106,7 @@ const onSubmit = async () => {
   display: flex;
   flex-direction: column;
 }
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -94,14 +116,7 @@ const onSubmit = async () => {
   margin-top: 100px; /* To ensure the form is not hidden behind the fixed header */
 }
 
-.form-signin {
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
-}
-
 .form-floating {
   margin-bottom: 15px;
 }
 </style>
-
