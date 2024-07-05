@@ -2,7 +2,7 @@
   <div class="app-container">
     <main class="form-signin w-100 m-auto">
       <form @submit.prevent="onSubmit">
-        <h1 class="h3 mb-3 fw-normal">Sing up</h1>
+        <h1 class="h3 mb-3 fw-normal">Sign up</h1>
 
         <!-- First Name Field -->
         <div class="form-floating">
@@ -93,7 +93,7 @@ const router = useRouter();
 
 // Submit handler for the form
 const onSubmit = async () => {
-    await axios.post('http://localhost:8080/api/register', data);
+    await axios.post('http://localhost:3000/api/register', data);
     await router.push('/login');
 };
 </script>
