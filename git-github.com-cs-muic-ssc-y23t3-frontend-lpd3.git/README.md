@@ -1,4 +1,4 @@
-# vue-login-register
+# vue-auth
 
 ## Project setup
 ```

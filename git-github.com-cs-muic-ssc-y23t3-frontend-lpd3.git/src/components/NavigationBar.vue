@@ -1,34 +1,45 @@
 <template>
-  <header class="p-3 text-bg-dark fixed-top">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-            <use xlink:href="#bootstrap" />
-          </svg>
-        </a>
-
-        <ul class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0 gap-3">
-          <router-link to="/"> class="nav-link px-2 text-secondary">Home</router-link>
-          <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-        </ul>
-
-        <div class="ms-auto text-end">
-          <router-link to="/login" class="btn btn-outline-light me-2 borderless-btn">Login</router-link>
-          <router-link to="/register" class="btn btn-warning">Sign-up</router-link>
-        </div>
-      </div>
+  <div class="topnav">
+    <!-- <router-link to="/">Home</router-link> -->
+    <div class="topnav-right">
+      <router-link to="/login" class="btn btn-outline-light">Sign In</router-link>
+      <router-link to="/register" class="btn btn-warning">Register</router-link>
     </div>
-  </header>
+  </div>
 </template>
+
 
 <script setup lang="ts">
 // Import statements or script setup if needed
 </script>
 
 <style scoped>
-/* Component-specific styles */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav-right{
+  float: right;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
 </style>
+
