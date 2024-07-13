@@ -1,16 +1,17 @@
 <template>
+  <Nav1 />
   <div class="app-container">
     <main class="form-signin w-100 m-auto">
-      <form @submit.prevent="onSubmit">
+      <form @submit.prevent="save">
         <h1 class="h3 mb-3 fw-normal">Sign in</h1>
 
         <div class="form-floating">
           <input
-              type="email"
+              type="text"
               class="form-control"
-              id="floatingInput"
-              placeholder="Email"
-              v-model="data.email"
+              id="customerNameInput"
+              placeholder="Customer Name"
+              v-model="customer.customername"
               required
           />
           <label for="floatingInput"> </label>
@@ -21,7 +22,7 @@
               class="form-control"
               id="floatingPassword"
               placeholder="Password"
-              v-model="data.password"
+              v-model="customer.password"
               required
           />
           <label for="floatingPassword"> </label>
@@ -38,18 +39,35 @@
 import { reactive } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import Nav1 from "@/components/NavigationBar.vue";
 
-const data = reactive({
-  email: '',
+// Reactive customer data object
+const customer = reactive({
+  customerID: '',
+  customername: '',
   password: ''
 });
+
 const router = useRouter();
 
-const onSubmit = async () => {
-    await axios.post('http://localhost:8080/api/login', data);
-    await router.push('/');
+
+const save = async () => {
+  try {
+    const response = await axios.post('http://localhost:8084/api/v1/customer/exist', customer);
+    if (response.data === true) {
+      await router.push('/index');
+    } else {
+      alert("Customer does not exist");
+      customer.customerID = '';
+      customer.customername = '';
+      customer.password = '';
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 </script>
+
 
 <style scoped>
 .app-container {

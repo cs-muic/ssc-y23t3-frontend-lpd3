@@ -1,14 +1,15 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-  <div class="container mt-5 text-center">
-    <h3> Hello </h3>
+  <Nav />
+  <div>
+    <p>Welcome, {{ customername }}!</p>
   </div>
-
 </template>
 
-<style scoped>
+<script setup>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
-</style>
+const store = useStore();
+const customername = computed(() => store.state.customer.customername);
+</script>
+

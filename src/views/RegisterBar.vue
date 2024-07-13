@@ -1,72 +1,32 @@
 <template>
+  <Nav1 />
   <div class="app-container">
     <main class="form-signin w-100 m-auto">
-      <form @submit.prevent="onSubmit">
+      <form @submit.prevent="save">
         <h1 class="h3 mb-3 fw-normal">Sign up</h1>
 
-        <!-- First Name Field -->
         <div class="form-floating">
           <input
               type="text"
               class="form-control"
-              id="firstNameInput"
-              placeholder="First Name"
-              v-model="data.firstName"
+              id="customerNameInput"
+              placeholder="Customer Name"
+              v-model="customer.customername"
               required
           />
-          <label for="firstNameInput"></label>
+          <label for="customerNameInput"> </label>
         </div>
 
-        <!-- Last Name Field -->
-        <div class="form-floating">
-          <input
-              type="text"
-              class="form-control"
-              id="lastNameInput"
-              placeholder="Last Name"
-              v-model="data.lastName"
-              required
-          />
-          <label for="lastNameInput"></label>
-        </div>
-
-        <!-- Email Field -->
-        <div class="form-floating">
-          <input
-              type="email"
-              class="form-control"
-              id="emailInput"
-              placeholder="Email"
-              v-model="data.email"
-              required
-          />
-          <label for="emailInput"></label>
-        </div>
-
-        <!-- Password Field -->
         <div class="form-floating">
           <input
               type="password"
               class="form-control"
               id="passwordInput"
               placeholder="Password"
-              v-model="data.password"
+              v-model="customer.password"
               required
           />
-          <label for="passwordInput"></label>
-        </div>
-
-        <!-- Confirm Password Field -->
-        <div class="form-floating">
-          <input
-              type="password"
-              class="form-control"
-              id="passwordConfirmationInput"
-              placeholder="Confirm Password"
-              v-model="data.password_confirmation"
-              required
-          />
-          <label for="passwordConfirmationInput"></label>
+          <label for="passwordInput"> </label>
         </div>
 
         <button class="btn btn-primary w-100 py-2" type="submit">Sign up</button>
@@ -79,22 +39,32 @@
 import { reactive } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import Nav1 from "@/components/NavigationBar.vue";
 
-// Reactive data object including firstName and lastName
-const data = reactive({
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: '',
-  password_confirmation: ''
+const customer = reactive({
+  customerID: '',
+  customername: '',
+  password: ''
 });
 
 const router = useRouter();
 
-// Submit handler for the form
-const onSubmit = async () => {
-    await axios.post('http://localhost:3000/api/register', data);
-    await router.push('/login');
+import { useStore } from 'vuex';
+const store = useStore();
+
+
+const save = async () => {
+  try {
+    const response = await axios.post('http://localhost:8084/api/v1/customer/save', customer);
+    const savedCustomer = response.data.toString();
+    store.dispatch('saveCustomer', savedCustomer);
+    customer.customerID = '';
+    customer.customername = '';
+    customer.password = '';
+    await router.push('/index');
+  } catch (error) {
+    console.error("There was an error registering the customer!", error);
+  }
 };
 </script>
 
@@ -111,12 +81,15 @@ const onSubmit = async () => {
   max-width: 330px;
   padding: 15px;
   margin: auto;
-  background: rgba(255, 255, 255, 0.8); /* Add some background to make the form readable */
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
-  margin-top: 100px; /* To ensure the form is not hidden behind the fixed header */
+  margin-top: 100px;
 }
 
 .form-floating {
   margin-bottom: 15px;
 }
 </style>
+
+
+
